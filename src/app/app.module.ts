@@ -8,6 +8,8 @@ import { AuthComponent } from './auth/auth.component';
 import { ShellComponent } from './shell/shell.component';
 import { ShellHeaderComponent } from './shell/shell-header/shell-header.component';
 import { ShellSidebarComponent } from './shell/shell-sidebar/shell-sidebar.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { ShellSidebarComponent } from './shell/shell-sidebar/shell-sidebar.compo
     AuthComponent,
     ShellComponent,
     ShellHeaderComponent,
-    ShellSidebarComponent
+    ShellSidebarComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
