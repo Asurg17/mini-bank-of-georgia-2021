@@ -1,0 +1,66 @@
+.nav{
+    text-align: center;
+}
+
+.nav:hover{
+    background-color: rgb(233, 227, 227);
+}
+
+.img{
+    width: 150px;
+}
+
+.custom-grid{
+    margin: 0 20px; 
+    width: 100%;
+}
+
+.zero-top-padded{
+    padding-top: 0 !important;
+}
+
+.zero-bottom-padded{
+    padding-bottom: 0 !important;
+}
+
+.zero-margin{
+    margin: 0;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.cli-info{
+    display: flex !important;
+    text-align: end;
+}
+
+.lightgrey{
+    color: lightgrey;
+}
+
+.limegreen{
+    color: limegreen;
+}
+
+.left-column-width{
+    width: 25%;
+}
+
+.middle-column-width{
+    width: 30%;
+}
+
+.right-column-width{
+    width: 15%;
+}
+
+.last-row{
+    display: flex !important;
+    align-items: center;
+}
+
+.bottom-margin{
+    margin-bottom: 20px !important;
+}
