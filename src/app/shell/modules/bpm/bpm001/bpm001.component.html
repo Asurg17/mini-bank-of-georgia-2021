@@ -6,37 +6,40 @@
     
     <div class="ui segment">
 
-        <div class="ui form">
+        <form class="ui form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
             <div class="nine wide field">
                 <label>სახელი</label>
                 <div class="ui input">
-                    <input type="text">
+                    <input type="text" id="firstname" formControlName="firstname">
                 </div>
+
+                <bg-validation-message [control]="form.get('firstname')"></bg-validation-message>
             </div>
 
             <div class="nine wide field">
                 <label>გვარი</label>
                 <div class="ui input">
-                    <input type="text">
+                    <input type="text" id="lastname" formControlName="lastname">
                 </div>
+
+                <bg-validation-message [control]="form.get('lastname')"></bg-validation-message>
             </div>
 
             <div class="nine wide field">
                 <label>Plus ქულები</label>
                 <div class="ui input">
-                    <input type="text">
+                    <input type="number" id="plusPoints" formControlName="plusPoints">
                 </div>
+
+                <bg-validation-message [control]="form.get('plusPoints')"></bg-validation-message>
             </div>
 
-        </div>
+            <button class="ui blue icon button" type="submit">
+                <i class="save icon"></i>
+            </button> 
 
-    </div>
-    
-    <div class="ui segment">
-        <div class="ui blue icon button">
-            <i class="save icon"></i>
-        </div> 
+        </form>
     </div>
 
 </div>

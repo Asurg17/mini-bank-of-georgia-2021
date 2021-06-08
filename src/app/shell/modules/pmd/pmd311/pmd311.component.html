@@ -6,38 +6,41 @@
     
     <div class="ui segment">
 
-        <div class="ui form">
+        <form class="ui form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
             <div class="nine wide field">
                 <label>გამგზავნი ანგარიში</label>
-                <select class="ui dropdown">
+                <select class="ui dropdown" formControlName="sender">
                     <option value="">აირჩიე</option>
                 </select>
+
+                <bg-validation-message [control]="form.get('sender')"></bg-validation-message>
             </div>
 
             <div class="nine wide field">
                 <label>მიმღები ანგარიში</label>
-                <select class="ui dropdown">
+                <select class="ui dropdown" formControlName="receiver">
                     <option value="">აირჩიე</option>
                 </select>
+
+                <bg-validation-message [control]="form.get('receiver')"></bg-validation-message>
             </div>
 
             <div class="nine wide field">
                 <label>თანხა</label>
                 <div class="ui input">
-                    <input type="number">
+                    <input type="number" formControlName="amount">
                 </div>
+
+                <bg-validation-message [control]="form.get('amount')"></bg-validation-message>
             </div>
-            
 
-        </div>
+            <button class="ui green icon button" type="submit">
+                <i class="check icon"></i>
+            </button>
 
-    </div>
-    
-    <div class="ui segment">
-        <div class="ui green icon button">
-            <i class="check icon"></i>
-        </div> 
+        </form>
+
     </div>
 
 </div>

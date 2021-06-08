@@ -10,7 +10,7 @@ import { CreateComponent } from './shell/modules/krn/accounts/create/create.comp
 import { KrnicpComponent } from './shell/modules/krn/krnicp/krnicp.component';
 import { OperationsComponent } from './shell/modules/krn/operations/operations.component';
 import { Pmd311Component } from './shell/modules/pmd/pmd311/pmd311.component';
-import { NotFoundComponent } from './shell/not-found/not-found.component';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { ShellComponent } from './shell/shell.component';
 
 const routes: Routes = [

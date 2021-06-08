@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { BgValidators } from 'src/app/bg-validators';
 
 @Component({
   selector: 'bg-login',
@@ -10,7 +11,11 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() { }
+  constructor() {}
+
+  ngOnInit(): void {
+    this.initForm()
+  }
 
   onSubmit(){
     if(this.form.invalid){
@@ -19,14 +24,11 @@ export class LoginComponent implements OnInit {
     console.log(this.form)
   }
 
-  ngOnInit(): void {
-    this.initForm()
-  }
-
   initForm(){
     this.form = new FormGroup({
-      username: new FormControl(undefined, Validators.required),
-      password: new FormControl(undefined, Validators.required)
+      username: new FormControl(undefined, [BgValidators.required, BgValidators.minimumSizeValidator.bind(this),
+                                            BgValidators.maximumSizeValidator.bind(this), BgValidators.spacesValidator.bind(this)]),
+      password: new FormControl(undefined, [BgValidators.required, BgValidators.minimumSizeValidator.bind(this), BgValidators.maximumSizeValidator.bind(this)])
     });
   }
 

@@ -6,30 +6,31 @@
     
     <div class="ui segment">
 
-        <div class="ui form">
+        <form class="ui form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
             <div class="nine wide field">
                 <label>ანგარიშის სახელი</label>
                 <div class="ui input">
-                    <input type="text">
+                    <input type="text" id="account" formControlName="account">
                 </div>
+
+                <bg-validation-message [control]="form.get('account')"></bg-validation-message>
             </div>
 
             <div class="nine wide field">
                 <label>თანხა</label>
                 <div class="ui input">
-                    <input type="number">
+                    <input type="number" id="amount" formControlName="amount">
                 </div>
-            </div>
 
-        </div>
+                <bg-validation-message [control]="form.get('amount')"></bg-validation-message>
+            </div>
+            
+            <button class="ui blue icon button" type="submit">
+                <i class="save icon"></i>
+            </button>
+        </form>
 
     </div>
     
-    <div class="ui segment">
-        <div class="ui blue icon button">
-            <i class="save icon"></i>
-        </div> 
-    </div>
-
 </div>

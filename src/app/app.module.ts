@@ -19,7 +19,8 @@ import { Pmd311Component } from './shell/modules/pmd/pmd311/pmd311.component';
 import { AccountsComponent } from './shell/modules/krn/accounts/accounts.component';
 import { CreateComponent } from './shell/modules/krn/accounts/create/create.component';
 import { PopupDirective } from './shell/shell-header/popup/popup.directive';
-import { NotFoundComponent } from './shell/not-found/not-found.component';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { ValidationMessageComponent } from './shared/validation-message/validation-message.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { NotFoundComponent } from './shell/not-found/not-found.component';
     AccountsComponent,
     CreateComponent,
     PopupDirective,
-    NotFoundComponent
+    NotFoundComponent,
+    ValidationMessageComponent
   ],
   imports: [
     BrowserModule,

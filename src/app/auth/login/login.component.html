@@ -5,9 +5,8 @@
             <i class="user icon"></i>
             <input type="text" placeholder="მომხმარებელი" id="username" formControlName="username">
         </div>
-        <p *ngIf="form.get('username').invalid && form.get('username').touched">
-            აუცილებელი ველი
-        </p>
+
+        <bg-validation-message [control]="form.get('username')"></bg-validation-message>
     </div>
 
     <div class="field">
@@ -15,9 +14,8 @@
             <i class="lock icon"></i>
             <input type="password" placeholder="პაროლი" id="password" formControlName="password">
         </div>
-        <p *ngIf="form.get('password').invalid && form.get('password').touched">
-            აუცილებელი ველი
-        </p>
+
+        <bg-validation-message [control]="form.get('password')"></bg-validation-message>
     </div>
 
     <div class="field">
