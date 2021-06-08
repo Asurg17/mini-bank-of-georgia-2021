@@ -1,4 +1,4 @@
-<div class="ui bottom-margin segments" >
+<div *ngIf="this.isVisible" class="ui bottom-margin segments" >
     
     <div class="ui segment;">
 
@@ -23,7 +23,7 @@
                         <div class="middle-column-width"></div>
 
                         <div class="bold middle-column-width">
-                            <p class="limegreen"> 100000 </p>
+                            <p class="limegreen"> 100000.00 </p>
                         </div>
 
                         <div class="bold right-column-width">
@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="right floated column">
-                        <div class="ui right floated red button">გასვლა</div>
+                        <div [routerLink]="['/bpm/bpm000']" routerLinkActive="active" class="ui right floated red button" (click)="hideClientHeader()">გასვლა</div>
                     </div>
 
                 </div>
@@ -77,17 +77,17 @@
 
     <div class="ui horizontal segments">
 
-        <div class="ui segment nav">
+        <a [routerLink]="['/krn/krnicp']" routerLinkActive="active" class="ui nav segment">
             მთავარი
-        </div>
+        </a>
 
-        <div class="ui segment nav">
+        <a [routerLink]="['/krn/accounts']" routerLinkActive="active" class="ui nav segment">
             ანგარიშები
-        </div>
+        </a>
         
-        <div class="ui segment nav">
+        <a [routerLink]="['/krn/operations']" routerLinkActive="active" class="ui nav segment">
             ოპერაციები
-        </div>
+        </a>
 
     </div>
 

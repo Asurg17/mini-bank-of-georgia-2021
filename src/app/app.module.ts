@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,7 @@ import { Pmd311Component } from './shell/modules/pmd/pmd311/pmd311.component';
 import { AccountsComponent } from './shell/modules/krn/accounts/accounts.component';
 import { CreateComponent } from './shell/modules/krn/accounts/create/create.component';
 import { PopupDirective } from './shell/shell-header/popup/popup.directive';
+import { NotFoundComponent } from './shell/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +38,14 @@ import { PopupDirective } from './shell/shell-header/popup/popup.directive';
     Pmd311Component,
     AccountsComponent,
     CreateComponent,
-    PopupDirective
+    PopupDirective,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

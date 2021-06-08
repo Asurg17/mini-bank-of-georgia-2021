@@ -1,27 +1,33 @@
-<div class="field">
-
-    <div class="ui left icon input">
-        <i class="user icon"></i>
-        <input type="text" placeholder="მომხმარებელი">
-    </div>
-
-</div>
-
-<div class="field">
-
-    <div class="ui left icon input">
-        <i class="lock icon"></i>
-        <input type="text" placeholder="პაროლი">
-    </div>
-
-</div>
-
-<div class="field">
+<form class="ui form" [formGroup]="form" (ngSubmit)="onSubmit()">
     
-    <span class="ui orange text">რეგისტრაცია</span>
+    <div class="field">
+        <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" placeholder="მომხმარებელი" id="username" formControlName="username">
+        </div>
+        <p *ngIf="form.get('username').invalid && form.get('username').touched">
+            აუცილებელი ველი
+        </p>
+    </div>
 
-    <button class="ui basic orange right floated button">
-        <i class="sign in  icon"></i>
-        შესვლა
-    </button>
-</div>
+    <div class="field">
+        <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" placeholder="პაროლი" id="password" formControlName="password">
+        </div>
+        <p *ngIf="form.get('password').invalid && form.get('password').touched">
+            აუცილებელი ველი
+        </p>
+    </div>
+
+    <div class="field">
+        <a [routerLink]="['register']" routerLinkActive="active">
+            <span class="ui orange text">რეგისტრაცია</span>
+        </a>
+
+        <button class="ui basic orange right floated button" type="submit">
+            <i class="sign in  icon"></i>
+            შესვლა
+        </button>
+    </div>
+</form>

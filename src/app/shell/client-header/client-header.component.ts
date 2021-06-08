@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientHeaderComponent implements OnInit {
 
+  isVisible = true;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  hideClientHeader(){
+    this.isVisible = !this.isVisible
   }
 
 }
