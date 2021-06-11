@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UnauthorizedService } from 'src/app/shared/servicies/authorized.service';
 
 @Component({
   selector: 'bg-bpm000',
@@ -7,9 +10,51 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Bpm000Component implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+  called = false;
+  clients = [];
+  error;
+
+  constructor(public unauthorizedService: UnauthorizedService, private router: Router) { }
 
   ngOnInit(): void {
+    this.initForm()
+  }
+
+  onSubmit(){
+
+    var firstname = this.form.value.firstname;
+    var lastname = this.form.value.lastname;
+    var clientkey = this.form.value.id;
+
+    if(firstname == null) firstname=""
+    if(lastname == null) lastname=""
+    if(clientkey == null) clientkey=""
+
+    this.unauthorizedService.getClients(firstname, lastname, clientkey).subscribe(
+      response =>  {
+        this.called = true;
+        this.clients = response;
+        console.log(response);
+      }, error => {
+        this.error = error.error;
+      }
+    );
+  }
+
+  forwardToClientPage(client: any){
+
+    console.log(client);
+    this.router.navigate(['/krn/krnicp']);
+    
+  }
+
+  initForm(){
+    this.form = new FormGroup({
+      firstname: new FormControl(undefined),
+      lastname: new FormControl(undefined),
+      id: new FormControl(undefined)
+    });
   }
 
 }

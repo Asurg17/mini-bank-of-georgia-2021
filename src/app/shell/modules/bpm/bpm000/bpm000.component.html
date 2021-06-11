@@ -1,3 +1,4 @@
+<bg-loader *ngIf="unauthorizedService.isLoading"></bg-loader>
 <div class="ui segments">
 
     <div class="ui segment">
@@ -8,7 +9,7 @@
 
         <div class="ui bordered segment">
 
-            <div class="ui form">
+            <form class="ui form"[formGroup]="form" (ngSubmit)="onSubmit()">
             
                 <div class="ui three column grid">
 
@@ -16,7 +17,7 @@
                         <div class="field">
                             <label>სახელი</label>
                             <div class="ui input">
-                                <input type="text">
+                                <input type="text" formControlName="firstname">
                             </div>
                         </div>
                     </div>
@@ -25,7 +26,7 @@
                         <div class="field">
                             <label>გვარი</label>
                             <div class="ui input">
-                                <input type="text">
+                                <input type="text" formControlName="lastname">
                             </div>
                         </div>
                     </div>
@@ -34,7 +35,7 @@
                         <div class="field">
                             <label>კლიენტის უნიკალური</label>
                             <div class="ui input">
-                                <input type="number">
+                                <input type="number" formControlName="id">
                             </div>  
                         </div>
                     </div>
@@ -43,41 +44,44 @@
 
                 <div class="ui one column grid">
                     <div class="column">
-                        <div class="ui right floated blue icon button">
+                        <button class="ui right floated blue icon button" type="submit">
                             <i class="search icon"></i>
-                        </div>
+                        </button>
                     </div>
                 </div>
         
-            </div>
+            </form>
 
         </div>
     </div>
 
-    <div class="ui segment" style="display: none;">
+    <div class="ui segment" *ngIf="called">
         
         <div class="table-header">
             <span>კლიენტები</span>
             
-            <div class="ui icon button">
+            <div [routerLink]="['/bpm/bpm001']" routerLinkActive="active" class="ui icon button">
                 <i class="plus icon"></i>
             </div> 
         </div>
         
-        <table>
-            <thead>
-                <th>სახელი</th>
-                <th>გვარი</th>
-                <th>კლიენტის უნიკალური</th>
-            </thead>
-        
-            <tbody>
-                <tr>
-                    <td> none </td>
-                    <td> none </td>
-                    <td> none </td>
-                </tr>
-            </tbody>
+        <table> 
+            <p *ngIf="!clients.length">ჩანაწერი ვერ მოიძებნა</p>
+            <table *ngIf="clients.length">
+                <thead>
+                    <th>სახელი</th>
+                    <th>გვარი</th>
+                    <th>კლიენტის უნიკალური</th>
+                </thead>
+            
+                <tbody>
+                    <tr *ngFor="let client of clients" (click)="forwardToClientPage(client)">
+                        <td> {{ client.firstName }} </td>
+                        <td> {{ client.lastName }} </td>
+                        <td> {{ client.clientKey }} </td>
+                    </tr>
+                </tbody>
+            </table>
         </table>
 
     </div>

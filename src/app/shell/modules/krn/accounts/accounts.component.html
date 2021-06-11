@@ -1,3 +1,4 @@
+<bg-loader *ngIf="unauthorizedService.isLoading"></bg-loader>
 <div class="ui segments">
 
     <div class="ui segment">
@@ -15,25 +16,33 @@
         </div>
         
         <table>
-            <thead>
-                <th>მფლობელი</th>
-                <th>სახელი</th>
-                <th>თანხა</th>
-                <th></th>
-            </thead>
-        
-            <tbody>
-                <tr>
-                    <td> none </td>
-                    <td> none </td>
-                    <td> 0.00 </td>
-                    <td>
-                        <div class="trash button icon">
-                            <i class="trash no-margin icon"></i>
-                        </div>  
-                    </td>
-                </tr>
-            </tbody>
+
+            <div class="table-footer" *ngIf="!accounts.length">
+                <p>ჩანაწერი ვერ მოიძებნა</p>
+            </div>
+
+            <table *ngIf="accounts.length">
+                <thead>
+                    <th>მფლობელი</th>
+                    <th>სახელი</th>
+                    <th>თანხა</th>
+                    <th></th>
+                </thead>
+            
+                <tbody>
+                    <tr *ngFor="let account of accounts">
+                        <td> {{ account.clientFirstName + " " + account.clientLastName }} </td>
+                        <td> {{ account.accountName }} </td>
+                        <td> {{ account.amount | styleNumber }} </td>
+                        <td>
+                            <div class="trash button icon" (click)="removeAccount(account.accountKey)">
+                                <i class="trash no-margin icon"></i>
+                            </div>  
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
         </table>
 
     </div>

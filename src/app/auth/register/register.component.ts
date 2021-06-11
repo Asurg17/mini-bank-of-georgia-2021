@@ -22,16 +22,37 @@ export class RegisterComponent implements OnInit {
       return;
     }
     console.log(this.form);
+
+    this.register();
+  }
+
+  register(){
+    
   }
 
   initForm(){ 
     this.form = new FormGroup({
-      wholename: new FormControl(undefined, [BgValidators.required, BgValidators.minimumSizeValidator.bind(this), BgValidators.maximumSizeValidator.bind(this)]),
-      username: new FormControl(undefined, [BgValidators.required, BgValidators.minimumSizeValidator.bind(this),
-                                            BgValidators.maximumSizeValidator.bind(this), BgValidators.spacesValidator.bind(this)]),
+      wholename: new FormControl(undefined, [
+        BgValidators.required,
+        BgValidators.minimumSizeValidator.bind(this),
+        BgValidators.maximumSizeValidator.bind(this)
+      ]),
+      username: new FormControl(undefined, [
+        BgValidators.required,
+        BgValidators.minimumSizeValidator.bind(this),
+        BgValidators.maximumSizeValidator.bind(this),
+        BgValidators.spacesValidator.bind(this)
+      ]),
       userData: new FormGroup({
-        password: new FormControl(undefined, [BgValidators.required, BgValidators.minimumSizeValidator.bind(this), BgValidators.maximumSizeValidator.bind(this)]),
-        repPassword: new FormControl(undefined, [BgValidators.required, BgValidators.minimumSizeValidator.bind(this), BgValidators.maximumSizeValidator.bind(this)])
+        password: new FormControl(undefined, [
+          BgValidators.required, 
+          BgValidators.minimumSizeValidator.bind(this),
+          BgValidators.maximumSizeValidator.bind(this)
+        ]),
+        repPassword: new FormControl(undefined, [BgValidators.required,
+          BgValidators.minimumSizeValidator.bind(this),
+          BgValidators.maximumSizeValidator.bind(this)
+        ])
       }, BgValidators.equalityValidation.bind(this))
     });
   }

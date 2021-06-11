@@ -1,3 +1,4 @@
+<bg-loader *ngIf="unauthorizedService.isLoading"></bg-loader>
 <div class="ui segments">
 
     <div class="ui segment">
@@ -12,6 +13,11 @@
                 <label>გამგზავნი ანგარიში</label>
                 <select class="ui dropdown" formControlName="sender">
                     <option value="">აირჩიე</option>
+                    <option *ngFor="let account of clientAccounts" value={{account.accountKey}}> 
+                        {{ account.accountKey }} - 
+                        {{ account.amount | styleNumber }}GEL
+                        ({{ account.accountName }}) 
+                    </option>
                 </select>
 
                 <bg-validation-message [control]="form.get('sender')"></bg-validation-message>
@@ -21,6 +27,11 @@
                 <label>მიმღები ანგარიში</label>
                 <select class="ui dropdown" formControlName="receiver">
                     <option value="">აირჩიე</option>
+                    <option *ngFor="let account of allAccounts" value={{account.accountKey}}> 
+                        {{ account.accountKey }} - 
+                        {{ account.amount | styleNumber }}GEL
+                        ({{ account.clientFirstName }} {{ account.clientLastName }}) 
+                    </option>
                 </select>
 
                 <bg-validation-message [control]="form.get('receiver')"></bg-validation-message>

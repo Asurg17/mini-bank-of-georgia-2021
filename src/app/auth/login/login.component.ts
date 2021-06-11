@@ -22,13 +22,27 @@ export class LoginComponent implements OnInit {
       return;
     }
     console.log(this.form)
+    
+    this.login();
+  }
+
+  login(){
+
   }
 
   initForm(){
     this.form = new FormGroup({
-      username: new FormControl(undefined, [BgValidators.required, BgValidators.minimumSizeValidator.bind(this),
-                                            BgValidators.maximumSizeValidator.bind(this), BgValidators.spacesValidator.bind(this)]),
-      password: new FormControl(undefined, [BgValidators.required, BgValidators.minimumSizeValidator.bind(this), BgValidators.maximumSizeValidator.bind(this)])
+      username: new FormControl(undefined, [
+        BgValidators.required, 
+        BgValidators.minimumSizeValidator.bind(this),
+        BgValidators.maximumSizeValidator.bind(this),
+        BgValidators.spacesValidator.bind(this)
+      ]),
+      password: new FormControl(undefined, [
+        BgValidators.required, 
+        BgValidators.minimumSizeValidator.bind(this), 
+        BgValidators.maximumSizeValidator.bind(this)
+      ])
     });
   }
 

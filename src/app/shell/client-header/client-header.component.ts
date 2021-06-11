@@ -9,6 +9,8 @@ export class ClientHeaderComponent implements OnInit {
 
   isVisible = true;
 
+  num = 1000;
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +22,9 @@ import { CreateComponent } from './shell/modules/krn/accounts/create/create.comp
 import { PopupDirective } from './shell/shell-header/popup/popup.directive';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { ValidationMessageComponent } from './shared/validation-message/validation-message.component';
+import { StyleNumberPipe } from './shared/style-number.pipe';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { AuthInterceptorService } from './shared/servicies/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -41,15 +45,24 @@ import { ValidationMessageComponent } from './shared/validation-message/validati
     CreateComponent,
     PopupDirective,
     NotFoundComponent,
-    ValidationMessageComponent
+    ValidationMessageComponent,
+    StyleNumberPipe,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
