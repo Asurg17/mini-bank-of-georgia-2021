@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthorizationService } from 'src/app/shared/servicies/authorization.service';
 
 @Component({
   selector: 'bg-shell-header',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShellHeaderComponent implements OnInit {
 
-  constructor() { }
+  loggedIn = false;
+
+  constructor(private authorizationService: AuthorizationService) { }
 
   ngOnInit(): void {
+    this.authorizationService.user.subscribe(user => {
+      this.loggedIn = !!user?.token;
+    });
+  }
+
+  logOut(){
+    this.authorizationService.logout();
   }
 
 }

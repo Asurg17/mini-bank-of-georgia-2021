@@ -13,7 +13,6 @@ import { UnauthorizedService } from 'src/app/shared/servicies/authorized.service
 export class CreateComponent implements OnInit {
 
   form: FormGroup;
-  account: {};
   error;
 
   constructor(public unauthorizedService: UnauthorizedService, private router: Router) {}
@@ -27,13 +26,18 @@ export class CreateComponent implements OnInit {
       return;
     }
 
-    this.unauthorizedService.createAccount(267, this.form.value.account, this.form.value.amount).subscribe(
-      (response: any) =>  {
-          this.account = response;
-          this.router.navigate(['krn/accounts']);
-          console.log(response);
+    this.createAccount();
+  }
+
+  createAccount(){
+    this.unauthorizedService.createAccount(267, this.form.value.account, this.form.value.amount)
+      .subscribe(response => {
+        this.form.reset();
+        this.router.navigate(['krn/accounts']);
+        console.log(response);
       }, error => {
-        this.error = error.error;
+        this.error = error;
+        console.log(error);
       });
   }
 

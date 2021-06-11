@@ -22,7 +22,10 @@ export class Bpm000Component implements OnInit {
   }
 
   onSubmit(){
-
+    this.getClients();
+  }
+  
+  getClients(){
     var firstname = this.form.value.firstname;
     var lastname = this.form.value.lastname;
     var clientkey = this.form.value.id;
@@ -31,22 +34,20 @@ export class Bpm000Component implements OnInit {
     if(lastname == null) lastname=""
     if(clientkey == null) clientkey=""
 
-    this.unauthorizedService.getClients(firstname, lastname, clientkey).subscribe(
-      response =>  {
+    this.unauthorizedService.getClients(firstname, lastname, clientkey)
+      .subscribe((response: any) => {
         this.called = true;
         this.clients = response;
         console.log(response);
       }, error => {
-        this.error = error.error;
-      }
-    );
+        this.error = error;
+        console.log(error);
+      });
   }
 
   forwardToClientPage(client: any){
-
     console.log(client);
     this.router.navigate(['/krn/krnicp']);
-    
   }
 
   initForm(){

@@ -20,7 +20,6 @@ export class Pmd311Component implements OnInit {
 
   ngOnInit(): void {
     this.initForm()
-
     this.fetchClientAccounts();
     this.fetchAllAccounts();
   }
@@ -29,35 +28,40 @@ export class Pmd311Component implements OnInit {
     if(this.form.invalid){
       return;
     }
-    
-    this.unauthorizedService.transferMoney(this.form.value.sender, this.form.value.receiver, this.form.value.amount).subscribe(
-      (response: any) =>  {
-        this.router.navigate(['/krn/accounts']); 
-        console.log(response);
+
+    this.transferMoney();
+  }
+
+  transferMoney(){
+    this.unauthorizedService.transferMoney(this.form.value.sender, this.form.value.receiver, this.form.value.amount)
+      .subscribe(response  => {
+          this.router.navigate(['/krn/accounts']); 
+          console.log(response);
       }, error => {
-        this.error = error.error;
-        console.log(this.error);
-      }
-    );
+        this.error = error;
+        console.log(error);
+      });
   }
 
   fetchClientAccounts() {
-    this.unauthorizedService.fetchAccounts(267).subscribe(
-      (response: any) =>  { 
+    this.unauthorizedService.fetchAccounts(267)
+      .subscribe((response: any) => { 
         this.clientAccounts = response;
-      }
-    );
+      }, error => {
+        this.error = error;
+        console.log(error);
+      });
   }
 
   fetchAllAccounts(){
-    this.unauthorizedService.fetchAccounts(null).subscribe(
-      (response: any) =>  { 
+    this.unauthorizedService.fetchAccounts(null)
+      .subscribe((response: any) => { 
         this.allAccounts = response;
-        console.log(response);
-      }
-    );
+      }, error => {
+        this.error = error;
+        console.log(error);
+      });
   }
-
 
   initForm(){
     this.form = new FormGroup({

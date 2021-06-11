@@ -26,16 +26,19 @@ export class Bpm001Component implements OnInit {
       return;
     }
 
-    this.unauthorizedService.registerClient(this.form.value.firstname, this.form.value.lastname, this.form.value.plusPoints).subscribe(
-      response =>  {
+    this.registerClient();
+  }
+
+  registerClient(){
+    this.unauthorizedService.registerClient(this.form.value.firstname, this.form.value.lastname, this.form.value.plusPoints)
+      .subscribe(response => {
         this.client = response;
         this.router.navigate(['krn/krnicp']);
         console.log(this.client);
       }, error => {
         this.error = error.error;
-      }
-    );
-
+        console.log(error);
+      });
   }
 
   initForm(){

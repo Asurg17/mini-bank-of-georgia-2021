@@ -42,6 +42,11 @@ const routes: Routes = [
           {
             path: 'bpm001',
             component: Bpm001Component
+          },
+          {
+            path: '',
+            redirectTo: 'bpm000',
+            pathMatch: 'full'
           }
         ]
       },
@@ -74,6 +79,11 @@ const routes: Routes = [
             component: Pmd311Component
           }
         ]
+      },
+      {
+        path: '',
+        redirectTo: 'bpm',
+        pathMatch: 'full'
       }
     ]
   },

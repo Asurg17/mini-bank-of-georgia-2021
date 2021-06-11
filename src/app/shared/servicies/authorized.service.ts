@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, Subject, throwError } from "rxjs";
-import { catchError, map } from "rxjs/operators";
+import { Subject, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { LoaderService } from "../loader/loader.service";
 @Injectable({
     providedIn: 'root'
 })
@@ -10,76 +11,68 @@ export class UnauthorizedService{
     isLoading = false;
     error$ = new Subject();
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient, private loader: LoaderService){}
 
-    withLoading(obs: Observable<any>): Observable<any>{
-        return new Observable(observer => {
-          this.isLoading = true;
-          obs.subscribe(resp => {
-            this.isLoading = false;
-            observer.next(resp);
-          }, error => {
-            this.isLoading = false;
-            observer.error(error);
-          });
-        });
-    }
-
-    createAccount(clientKey:number, account:string, amount:number){
-        return this.withLoading(this.http.put('accounts',
-                    {
-                      clientKey: clientKey,
-                      accountName: account,
-                      amount:	amount
-                    })).pipe();
+    createAccount(clientKey:number, accountName:string, amount:number){
+      return this.http.put('accounts', {
+        clientKey, accountName, amount
+      }).pipe(
+        this.loader.useLoader,
+        catchError(err => throwError(err.error))
+      );
     }
 
     fetchAccounts(clientKey:number){
-        
-        let params = new HttpParams();
+      let params = new HttpParams();
+      if(clientKey != null) params = params.append('clientKey', '' + clientKey);
 
-        if(clientKey != null){
-            params = params.append('clientKey', '' + clientKey);
-        }
-
-        return this.withLoading(this.http.get('accounts', { params })).pipe(catchError(err => {
-            return throwError(err.error)
-        }));
+      return this.http.get('accounts', { params })
+        .pipe(
+          this.loader.useLoader,
+          catchError(err => throwError(err.error))
+        );
     }
 
     removeAccount(accountKey:number){
+      let params = new HttpParams();
+      params = params.append('accountKey', '' + accountKey);
 
-        let params = new HttpParams();
-        params = params.append('accountKey', '' + accountKey);
-
-        return this.withLoading(this.http.delete('accounts', { params })).pipe();
+      return this.http.delete('accounts', { params })
+        .pipe(
+          this.loader.useLoader,
+          catchError(err => throwError(err.error))
+        );
     }
 
-    transferMoney(sender:string, receiver:string, amount:number){
-        return this.withLoading(this.http.post('transfer',
-                        {
-                          senderAccountKey:	sender,
-                          receiverAccountKey: receiver,
-                          amount: amount
-                        })).pipe();
+    transferMoney(senderAccountKey:string, receiverAccountKey:string, amount:number){
+      return this.http.post('transfer', {
+        senderAccountKey, receiverAccountKey, amount
+      }).pipe(
+        this.loader.useLoader,
+        catchError(err => throwError(err.error))
+      );
     }
 
     getClients(firstname: string, lastname: string, clientkey: number){
+      let params = new HttpParams();
+      params = params.append('firstName', firstname);
+      params = params.append('lastName', lastname);
+      params = params.append('clientKey', '' + clientkey);
 
-        let params = new HttpParams();
-        params = params.append('firstName', firstname);
-        params = params.append('lastName', lastname);
-        params = params.append('clientKey', '' + clientkey);
-
-        return this.withLoading(this.http.get('clients', { params })).pipe();
+      return this.http.get('clients', { params })
+        .pipe(
+          this.loader.useLoader,
+          catchError(err => throwError(err.error))
+        );
     }
 
-    registerClient(firstname: string, lastname: string, plusPoints: number){
-        return this.withLoading(this.http.put('clients',
-                  {
-                    firstName: firstname,
-                    lastName: lastname,
-                    plusPoints: plusPoints
-                  })).pipe();
+    registerClient(firstName: string, lastName: string, plusPoints: number){
+      return this.http.put('clients', {
+        firstName, lastName, plusPoints
+      }).pipe(
+        this.loader.useLoader,
+        catchError(err => throwError(err.error))
+      );
     }
+
 }
