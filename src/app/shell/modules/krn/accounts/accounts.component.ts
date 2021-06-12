@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { UnauthorizedService } from 'src/app/shared/servicies/authorized.service';
+import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 
 @Component({
   selector: 'bg-accounts',
@@ -9,35 +9,33 @@ import { UnauthorizedService } from 'src/app/shared/servicies/authorized.service
 })
 export class AccountsComponent implements OnInit {
 
-  accounts = []
-  clientKey: Number;
+  accounts = [];
   error;
 
-  constructor(public unauthorizedService: UnauthorizedService, private router: Router) { }
+  constructor(public authorizedService: AuthorizedService, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchAccounts();
   }
 
   fetchAccounts() {
-    this.unauthorizedService.fetchAccounts(267)
+    this.authorizedService.fetchAccounts(true)
       .subscribe((response: any) => { 
         this.accounts = response;
       }, error => {
         this.error = error;
-        console.log(error);
       });
   }
 
   removeAccount(accountKey: number){
-    this.unauthorizedService.removeAccount(accountKey)
+    this.authorizedService.removeAccount(accountKey)
       .subscribe(response =>  {
+        this.authorizedService.fetchClientInfo();
         this.accounts = this.accounts.filter(account => account.accountKey !== accountKey);
         console.log(response);
       }, error => {
         this.error = error;
         console.log(error);
       });
-  }
-
+    }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 
 @Component({
   selector: 'bg-client-header',
@@ -7,17 +8,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientHeaderComponent implements OnInit {
 
-  isVisible = true;
+  firstname: string;
+  lastName: string;
+  image: string;
+  clientKey: number;
+  sumAmount: number;
+  plusPoints:	number;
 
-  num = 1000;
-
-  constructor() { }
+  constructor(public authorizedService: AuthorizedService) { }
 
   ngOnInit(): void {
+    this.getClientInfo();
   }
 
-  hideClientHeader(){
-    this.isVisible = !this.isVisible
+  removeClient(){
+    this.authorizedService.removeClient();
+  }
+
+  getClientInfo(){
+    this.authorizedService.client.subscribe(client => {
+      if(client){
+        this.firstname = client.firstname;
+        this.lastName = client.lastName;
+        this.image = client.image;
+        this.clientKey = client.clientKey;
+        this.sumAmount = client.sumAmount;
+        this.plusPoints = client.plusPoints;
+      }
+    });
   }
 
 }

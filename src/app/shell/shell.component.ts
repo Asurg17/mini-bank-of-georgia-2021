@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthorizedService } from '../shared/servicies/authorized.service';
 
 @Component({
   selector: 'bg-shell',
@@ -12,9 +13,10 @@ export class ShellComponent implements OnInit {
     return `${('0' + d.getDate()).slice(-2)}/${('0' + (d.getMonth() + 1)).slice(-2)}/${d.getFullYear()}`;
   }
 
-  constructor() { }
+  constructor(private authorizedService: AuthorizedService) { }
 
   ngOnInit(): void {
+    this.authorizedService.fetchClientInfo();
   }
 
 }

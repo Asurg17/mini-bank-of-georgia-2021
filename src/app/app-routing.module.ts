@@ -12,6 +12,8 @@ import { OperationsComponent } from './shell/modules/krn/operations/operations.c
 import { Pmd311Component } from './shell/modules/pmd/pmd311/pmd311.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { ShellComponent } from './shell/shell.component';
+import { AuthGuardService } from './shared/servicies/auth-guard.service';
+import { ClientGuardService } from './shared/servicies/client-guard.service';
 
 const routes: Routes = [
   {
@@ -31,6 +33,7 @@ const routes: Routes = [
   {
     path: '',
     component: ShellComponent,
+    canActivate: [AuthGuardService],
     children: [
       {
         path: 'bpm',
@@ -52,6 +55,7 @@ const routes: Routes = [
       },
       {
         path: 'krn',
+        canActivate: [ClientGuardService],
         children: [
           {
             path: 'accounts',
@@ -68,6 +72,11 @@ const routes: Routes = [
           {
             path: 'operations',
             component: OperationsComponent
+          },
+          {
+            path: '',
+            redirectTo: 'krnicp',
+            pathMatch: 'full'
           }
         ]
       },

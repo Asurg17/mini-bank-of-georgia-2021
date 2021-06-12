@@ -1,17 +1,17 @@
-<div *ngIf="this.isVisible" class="ui bottom-margin segments" >
+<div *ngIf="authorizedService.isVisibleClientHeader" class="ui bottom-margin segments" >
     
     <div class="ui segment;">
 
         <div class="ui segment" style="display: flex;">
 
-            <img src="../../../assets/images/cc.jpg" class="img">
+            <img src={{image}} class="img">
 
             <div class="ui grid custom-grid">
 
                 <div class="three column zero-top-padded row">
                     
                     <div class="left floated column">
-                        <p class="bold" > Test 4 Test </p>
+                        <p class="bold" > {{ firstname }} {{ lastName }} </p>
                     </div>
                     
                     <div class="right floated cli-info column">
@@ -23,7 +23,7 @@
                         <div class="middle-column-width"></div>
 
                         <div class="bold middle-column-width">
-                            <p class="limegreen"> {{ num | styleNumber }} </p>
+                            <p class="limegreen"> {{ sumAmount | styleNumber }} </p>
                         </div>
 
                         <div class="bold right-column-width">
@@ -45,7 +45,7 @@
                         <div class="middle-column-width"></div>
 
                         <div class="bold middle-column-width">
-                            <p> 50000 </p>
+                            <p> {{ plusPoints }} </p>
                         </div>
 
                         <div class="bold right-column-width"></div>
@@ -60,11 +60,11 @@
 
                     <div class="left floated last-row column">
                         <p class="zero-margin lightgrey" > უნიკალური კოდი: </p>
-                        <p class="bold">18</p>
+                        <p class="bold"> {{ clientKey }} </p>
                     </div>
 
                     <div class="right floated column">
-                        <div [routerLink]="['/bpm/bpm000']" routerLinkActive="active" class="ui right floated red button" (click)="hideClientHeader()">გასვლა</div>
+                        <div class="ui right floated red button" (click)="removeClient()">გასვლა</div>
                     </div>
 
                 </div>

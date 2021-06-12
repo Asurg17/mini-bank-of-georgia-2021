@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BgValidators } from 'src/app/bg-validators';
-import { UnauthorizedService } from 'src/app/shared/servicies/authorized.service';
+import { BgValidators } from 'src/app/shared/bg-validators';
+import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 
 @Component({
   selector: 'bg-bpm001',
@@ -15,7 +15,7 @@ export class Bpm001Component implements OnInit {
   client: {};
   error;
   
-  constructor(public unauthorizedService: UnauthorizedService, private router: Router) { }
+  constructor(private authorizedService: AuthorizedService, private router: Router) { }
 
   ngOnInit(): void {
     this.initForm()
@@ -30,14 +30,12 @@ export class Bpm001Component implements OnInit {
   }
 
   registerClient(){
-    this.unauthorizedService.registerClient(this.form.value.firstname, this.form.value.lastname, this.form.value.plusPoints)
+    this.authorizedService.registerClient(this.form.value.firstname, this.form.value.lastname, this.form.value.plusPoints)
       .subscribe(response => {
         this.client = response;
-        this.router.navigate(['krn/krnicp']);
-        console.log(this.client);
+        this.router.navigate(['/krn/krnicp']);
       }, error => {
         this.error = error.error;
-        console.log(error);
       });
   }
 

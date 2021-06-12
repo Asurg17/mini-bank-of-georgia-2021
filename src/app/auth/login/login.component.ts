@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BgValidators } from 'src/app/bg-validators';
+import { BgValidators } from 'src/app/shared/bg-validators';
 import { AuthorizationService } from 'src/app/shared/servicies/authorization.service';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BgValidators } from 'src/app/bg-validators';
-import { UnauthorizedService } from 'src/app/shared/servicies/authorized.service';
+import { BgValidators } from 'src/app/shared/bg-validators';
+import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 
 @Component({
   selector: 'bg-pmd311',
@@ -16,7 +16,7 @@ export class Pmd311Component implements OnInit {
   allAccounts: [];
   error;
 
-  constructor(public unauthorizedService: UnauthorizedService, private router: Router) {}
+  constructor(public authorizedService: AuthorizedService, private router: Router) {}
 
   ngOnInit(): void {
     this.initForm()
@@ -33,10 +33,11 @@ export class Pmd311Component implements OnInit {
   }
 
   transferMoney(){
-    this.unauthorizedService.transferMoney(this.form.value.sender, this.form.value.receiver, this.form.value.amount)
+    this.authorizedService.transferMoney(this.form.value.sender, this.form.value.receiver, this.form.value.amount)
       .subscribe(response  => {
-          this.router.navigate(['/krn/accounts']); 
-          console.log(response);
+        this.authorizedService.fetchClientInfo();
+        this.router.navigate(['/krn/accounts']); 
+        console.log(response);
       }, error => {
         this.error = error;
         console.log(error);
@@ -44,7 +45,7 @@ export class Pmd311Component implements OnInit {
   }
 
   fetchClientAccounts() {
-    this.unauthorizedService.fetchAccounts(267)
+    this.authorizedService.fetchAccounts(true)
       .subscribe((response: any) => { 
         this.clientAccounts = response;
       }, error => {
@@ -54,7 +55,7 @@ export class Pmd311Component implements OnInit {
   }
 
   fetchAllAccounts(){
-    this.unauthorizedService.fetchAccounts(null)
+    this.authorizedService.fetchAccounts(false)
       .subscribe((response: any) => { 
         this.allAccounts = response;
       }, error => {
