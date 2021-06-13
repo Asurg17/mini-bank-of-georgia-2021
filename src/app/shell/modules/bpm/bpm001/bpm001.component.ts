@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { BgValidators } from 'src/app/shared/bg-validators';
 import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 
@@ -21,15 +22,15 @@ export class Bpm001Component implements OnInit {
     this.initForm()
   }
 
-  onSubmit(){
-    if(this.form.invalid){
+  onSubmit() {
+    if (this.form.invalid) {
       return;
     }
 
     this.registerClient();
   }
 
-  registerClient(){
+  registerClient() {
     this.authorizedService.registerClient(this.form.value.firstname, this.form.value.lastname, this.form.value.plusPoints)
       .subscribe(response => {
         this.client = response;
@@ -39,7 +40,7 @@ export class Bpm001Component implements OnInit {
       });
   }
 
-  initForm(){
+  initForm() {
     this.form = new FormGroup({
       firstname: new FormControl(undefined, [
         BgValidators.required,

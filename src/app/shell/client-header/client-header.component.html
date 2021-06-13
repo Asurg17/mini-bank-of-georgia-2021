@@ -9,13 +9,11 @@
             <div class="ui grid custom-grid">
 
                 <div class="three column zero-top-padded row">
-                    
                     <div class="left floated column">
                         <p class="bold" > {{ firstname }} {{ lastName }} </p>
                     </div>
                     
                     <div class="right floated cli-info column">
-
                         <div class="left-column-width">
                             <label class="lightgrey"> აქტივები: </label>
                         </div>
@@ -29,15 +27,11 @@
                         <div class="bold right-column-width">
                             <p>GEL</p>
                         </div>
-
                     </div>
-                    
                 </div>
                 
                 <div class="three column zero-top-padded row">
-
                     <div class="right floated cli-info column">
-
                         <div class="left-column-width">
                             <label class="lightgrey"> Plus: </label>
                         </div>
@@ -49,15 +43,12 @@
                         </div>
 
                         <div class="bold right-column-width"></div>
-
                     </div>
-
                 </div>
                 
                 <div class="row"></div>
                 
                 <div class="three column zero-top-padded zero-bottom-padded row">
-
                     <div class="left floated last-row column">
                         <p class="zero-margin lightgrey" > უნიკალური კოდი: </p>
                         <p class="bold"> {{ clientKey }} </p>
@@ -66,17 +57,15 @@
                     <div class="right floated column">
                         <div class="ui right floated red button" (click)="removeClient()">გასვლა</div>
                     </div>
-
                 </div>
 
             </div>
-            
-        </div>
 
+        </div>
+        
     </div>
 
     <div class="ui horizontal segments">
-
         <a [routerLink]="['/krn/krnicp']" routerLinkActive="active" class="ui nav segment">
             მთავარი
         </a>
@@ -88,7 +77,6 @@
         <a [routerLink]="['/krn/operations']" routerLinkActive="active" class="ui nav segment">
             ოპერაციები
         </a>
-
     </div>
 
 </div>

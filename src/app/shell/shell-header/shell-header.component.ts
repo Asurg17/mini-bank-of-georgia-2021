@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AuthorizationService } from 'src/app/shared/servicies/authorization.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class ShellHeaderComponent implements OnInit {
     });
   }
 
-  logOut(){
+  logOut() {
     this.authorizationService.logout();
   }
 

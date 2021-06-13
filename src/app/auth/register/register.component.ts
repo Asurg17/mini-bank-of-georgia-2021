@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { BgValidators } from 'src/app/shared/bg-validators';
 import { AuthorizationService } from 'src/app/shared/servicies/authorization.service';
 
@@ -12,6 +13,7 @@ import { AuthorizationService } from 'src/app/shared/servicies/authorization.ser
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
+  error;
 
   constructor(private authorizationService: AuthorizationService, private router: Router) {}
 
@@ -19,26 +21,25 @@ export class RegisterComponent implements OnInit {
     this.initForm()
   }
 
-  onSubmit(){
-    if(this.form.invalid){
+  onSubmit() {
+    if (this.form.invalid) {
       return;
     }
 
     this.register();
   }
 
-  register(){
+  register() {
     this.authorizationService.register(this.form.value.wholename, this.form.value.username, this.form.value.userData.password)
       .subscribe(response => {
-        console.log(response);
         this.form.reset();
         this.router.navigate(['/']);
       }, error => {
-        console.log(error);
+        this.error = error;
       });
   }
 
-  initForm(){ 
+  initForm() { 
     this.form = new FormGroup({
       wholename: new FormControl(undefined, [
         BgValidators.required,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { ClientResponseModel } from 'src/app/shared/client-response.model';
 import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 
@@ -22,18 +23,18 @@ export class Bpm000Component implements OnInit {
     this.initForm()
   }
 
-  onSubmit(){
+  onSubmit() {
     this.getClients();
   }
   
-  getClients(){
+  getClients() {
     var firstname = this.form.value.firstname;
     var lastname = this.form.value.lastname;
     var clientkey = this.form.value.id;
 
-    if(firstname == null) firstname=""
-    if(lastname == null) lastname=""
-    if(clientkey == null) clientkey=""
+    if (firstname == null) firstname=""
+    if (lastname == null) lastname=""
+    if (clientkey == null) clientkey=""
 
     this.authorizedService.getClients(firstname, lastname, clientkey)
       .subscribe((response: any) => {
@@ -44,12 +45,12 @@ export class Bpm000Component implements OnInit {
       });
   }
 
-  forwardToClientPage(client: ClientResponseModel){
+  forwardToClientPage(client: ClientResponseModel) {
     this.authorizedService.handleClient(client);
     this.router.navigate(['/krn/krnicp']);
   }
 
-  initForm(){
+  initForm() {
     this.form = new FormGroup({
       firstname: new FormControl(undefined),
       lastname: new FormControl(undefined),

@@ -16,7 +16,7 @@ export class ValidationMessageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  errors(){
+  errors() {
     return this.control?.errors && Object.values(this.control?.errors);
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 
 @Component({
@@ -21,11 +22,11 @@ export class ClientHeaderComponent implements OnInit {
     this.getClientInfo();
   }
 
-  removeClient(){
+  removeClient() {
     this.authorizedService.removeClient();
   }
 
-  getClientInfo(){
+  getClientInfo() {
     this.authorizedService.client.subscribe(client => {
       if(client){
         this.firstname = client.firstname;

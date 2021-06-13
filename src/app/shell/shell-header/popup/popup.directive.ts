@@ -11,11 +11,11 @@ export class PopupDirective {
   constructor(private elementRef: ElementRef<HTMLElement>) { }
 
   @HostListener('document:click', ['$event'])
-  clickListener(event: Event){
+  clickListener(event: Event) {
     // @ts-ignore
-    if(this.elementRef.nativeElement.contains(event.target)){
+    if (this.elementRef.nativeElement.contains(event.target)) {
       this.open = !this.open;
-    }else{
+    } else {
       this.open = false;
     }
   }

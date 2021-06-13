@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { BgValidators } from 'src/app/shared/bg-validators';
 import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 
@@ -24,23 +25,21 @@ export class Pmd311Component implements OnInit {
     this.fetchAllAccounts();
   }
 
-  onSubmit(){
-    if(this.form.invalid){
+  onSubmit() {
+    if (this.form.invalid) {
       return;
     }
 
     this.transferMoney();
   }
 
-  transferMoney(){
+  transferMoney() {
     this.authorizedService.transferMoney(this.form.value.sender, this.form.value.receiver, this.form.value.amount)
       .subscribe(response  => {
         this.authorizedService.fetchClientInfo();
-        this.router.navigate(['/krn/accounts']); 
-        console.log(response);
+        this.router.navigate(['/krn/accounts']);
       }, error => {
         this.error = error;
-        console.log(error);
       });
   }
 
@@ -50,21 +49,19 @@ export class Pmd311Component implements OnInit {
         this.clientAccounts = response;
       }, error => {
         this.error = error;
-        console.log(error);
       });
   }
 
-  fetchAllAccounts(){
+  fetchAllAccounts() {
     this.authorizedService.fetchAccounts(false)
       .subscribe((response: any) => { 
         this.allAccounts = response;
       }, error => {
         this.error = error;
-        console.log(error);
       });
   }
 
-  initForm(){
+  initForm() {
     this.form = new FormGroup({
       sender: new FormControl(undefined, BgValidators.required),
       receiver: new FormControl(undefined, BgValidators.required),

@@ -9,7 +9,7 @@ export class LoaderService {
 
     public active = 0;
 
-    useLoader = <T>(obs: Observable<T>): Observable<T> =>{
+    useLoader = <T>(obs: Observable<T>): Observable<T> => {
         this.startLoader();
         return obs.pipe(finalize(() => {
             this.stopLoader();
@@ -17,7 +17,7 @@ export class LoaderService {
     }
 
     startLoader(){
-        this.active ++;
+        this.active++;
     }
 
     stopLoader(){

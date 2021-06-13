@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 
 @Component({
@@ -27,15 +28,13 @@ export class AccountsComponent implements OnInit {
       });
   }
 
-  removeAccount(accountKey: number){
+  removeAccount(accountKey: number) {
     this.authorizedService.removeAccount(accountKey)
       .subscribe(response =>  {
         this.authorizedService.fetchClientInfo();
         this.accounts = this.accounts.filter(account => account.accountKey !== accountKey);
-        console.log(response);
       }, error => {
         this.error = error;
-        console.log(error);
       });
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { BgValidators } from 'src/app/shared/bg-validators';
 import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 
@@ -20,15 +21,15 @@ export class CreateComponent implements OnInit {
     this.initForm()
   }
 
-  onSubmit(){
-    if(this.form.invalid){
+  onSubmit() {
+    if (this.form.invalid) {
       return;
     }
 
     this.createAccount();
   }
 
-  createAccount(){
+  createAccount() {
     this.authorizedService.createAccount(this.form.value.account, this.form.value.amount)
       .subscribe(response => {
         this.authorizedService.fetchClientInfo();
@@ -39,7 +40,7 @@ export class CreateComponent implements OnInit {
       });
   }
 
-  initForm(){
+  initForm() {
     this.form = new FormGroup({
       account: new FormControl(undefined, [
         BgValidators.required,

@@ -7,8 +7,8 @@ export class UserModel {
         private _expirationDate: Date
     ){}
 
-    get token(){
-        if (this._expirationDate >= new Date()){
+    get token() {
+        if (this._expirationDate >= new Date()) {
             return this._token;
         }
     }

@@ -2,6 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/c
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { switchMap, take, tap } from "rxjs/operators";
+
 import { AuthorizationService } from "./authorization.service";
 
 @Injectable()
@@ -22,7 +23,6 @@ export class AuthInterceptorService implements HttpInterceptor{
                     headers: request.headers.append('Authorization', 'Bearer ' + user.token),
                     url: 'https://bog-angular-course-api.herokuapp.com/' + request.url
                 });
-                console.log(modifiedRequest);
                 return handler.handle(modifiedRequest);
             }) 
         );

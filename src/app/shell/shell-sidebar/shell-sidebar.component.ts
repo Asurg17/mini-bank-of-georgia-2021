@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AuthorizationService } from 'src/app/shared/servicies/authorization.service';
 
 @Component({
@@ -18,9 +19,9 @@ export class ShellSidebarComponent implements OnInit {
     this.renderUserInfo();
   }
 
-  renderUserInfo(){
+  renderUserInfo() {
     this.authorizationService.user.subscribe(user => {
-      if (user){
+      if (user) {
         this.name = user.name;
         this.username = user.username;
         this.image = user.image;

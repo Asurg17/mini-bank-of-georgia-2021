@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Subject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
+
 import { AuthResponseModel } from "src/app/auth/auth-response.model";
 import { LoaderService } from "../loader/loader.service";
 import { UserModel } from "../user.model";
@@ -33,7 +34,7 @@ export class AuthorizationService{
         this.autoLogout(new Date(authResponse.expirationDate));
     };
 
-    register(name: string, username: string, password: string){
+    register(name: string, username: string, password: string) {
         return this.http.post<AuthResponseModel>('https://bog-angular-course-api.herokuapp.com/register', {
             name, username, password
         }).pipe(
@@ -43,7 +44,7 @@ export class AuthorizationService{
         );
     }
 
-    login(username: string, password: string){
+    login(username: string, password: string) {
         return this.http.post<AuthResponseModel>('https://bog-angular-course-api.herokuapp.com/login', {
             username, password
         }).pipe(
@@ -53,10 +54,10 @@ export class AuthorizationService{
         );
     }
 
-    autoLogin(){
+    autoLogin() {
         const userInfo = JSON.parse(localStorage.getItem('user'));
 
-        if(!userInfo) return;
+        if (!userInfo) return;
         
         const user = new UserModel(
             userInfo.name,
@@ -66,7 +67,7 @@ export class AuthorizationService{
             new Date(userInfo._expirationDate)
         );
 
-        if(!user.token){
+        if (!user.token) {
             localStorage.removeItem('user');
             return;
         }
@@ -75,7 +76,7 @@ export class AuthorizationService{
         this.autoLogout(new Date(userInfo._expirationDate));
     }
 
-    logout(){
+    logout() {
         this.user.next(null);
         localStorage.removeItem('user');
         this.authorizedService.removeClient();
@@ -83,7 +84,7 @@ export class AuthorizationService{
         clearTimeout(this.timeout);
     }
 
-    autoLogout(logoutTime: Date){
+    autoLogout(logoutTime: Date) {
         this.timeout = setTimeout(() => this.logout(), Math.min((logoutTime.getTime() - new Date().getTime()), 2147483647));
     }
 }
