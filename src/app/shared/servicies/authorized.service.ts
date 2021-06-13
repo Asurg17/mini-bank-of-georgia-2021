@@ -4,9 +4,10 @@ import { Router } from "@angular/router";
 import { BehaviorSubject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 
-import { ClientResponseModel } from "src/app/shared/client-response.model";
-import { ClientModel } from "../client.model";
+import { ClientResponseModel } from "src/app/shared/models/client-response.model";
+import { ClientModel } from "../models/client.model";
 import { LoaderService } from "../loader/loader.service";
+
 
 @Injectable({
     providedIn: 'root'

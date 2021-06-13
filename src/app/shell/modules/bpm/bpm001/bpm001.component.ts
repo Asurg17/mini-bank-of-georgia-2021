@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/alert/alert.service';
 
 import { BgValidators } from 'src/app/shared/bg-validators';
 import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
@@ -14,9 +15,8 @@ export class Bpm001Component implements OnInit {
 
   form: FormGroup;
   client: {};
-  error;
   
-  constructor(private authorizedService: AuthorizedService, private router: Router) { }
+  constructor(private authorizedService: AuthorizedService, private router: Router, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.initForm()
@@ -36,7 +36,7 @@ export class Bpm001Component implements OnInit {
         this.client = response;
         this.router.navigate(['/krn/krnicp']);
       }, error => {
-        this.error = error.error;
+        this.alertService.error = error.error;
       });
   }
 

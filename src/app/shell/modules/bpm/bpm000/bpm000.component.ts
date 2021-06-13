@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/alert/alert.service';
 
-import { ClientResponseModel } from 'src/app/shared/client-response.model';
+import { ClientResponseModel } from 'src/app/shared/models/client-response.model';
 import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 
 @Component({
@@ -15,9 +16,8 @@ export class Bpm000Component implements OnInit {
   form: FormGroup;
   called = false;
   clients = [];
-  error;
 
-  constructor(private authorizedService: AuthorizedService, private router: Router) { }
+  constructor(private authorizedService: AuthorizedService, private router: Router, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.initForm()
@@ -41,7 +41,7 @@ export class Bpm000Component implements OnInit {
         this.called = true;
         this.clients = response;
       }, error => {
-        this.error = error;
+        this.alertService.error = error;
       });
   }
 

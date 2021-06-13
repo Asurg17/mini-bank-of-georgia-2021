@@ -6,7 +6,7 @@ import { catchError, tap } from "rxjs/operators";
 
 import { AuthResponseModel } from "src/app/auth/auth-response.model";
 import { LoaderService } from "../loader/loader.service";
-import { UserModel } from "../user.model";
+import { UserModel } from "../models/user.model";
 import { AuthorizedService } from "./authorized.service";
 
 @Injectable({

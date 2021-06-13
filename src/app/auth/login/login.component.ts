@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
+import { AlertService } from 'src/app/shared/alert/alert.service';
 import { BgValidators } from 'src/app/shared/bg-validators';
 import { AuthorizationService } from 'src/app/shared/servicies/authorization.service';
 
@@ -10,12 +12,16 @@ import { AuthorizationService } from 'src/app/shared/servicies/authorization.ser
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-
+export class LoginComponent implements OnInit, OnDestroy {
+  
   form: FormGroup;
-  error;
+  closedSubs: Subscription;
+  
+  constructor(private authorizationService: AuthorizationService, private router: Router, private alertService: AlertService) {}
 
-  constructor(private authorizationService: AuthorizationService, private router: Router) {}
+  ngOnDestroy(): void {
+    this.closedSubs?.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.initForm()
@@ -35,7 +41,7 @@ export class LoginComponent implements OnInit {
         this.form.reset();
         this.router.navigate(['/']);
       }, error => {
-        this.error = error;
+        this.alertService.error = error;
       });
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/alert/alert.service';
 
 import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 
@@ -11,9 +12,8 @@ import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 export class AccountsComponent implements OnInit {
 
   accounts = [];
-  error;
 
-  constructor(public authorizedService: AuthorizedService, private router: Router) { }
+  constructor(public authorizedService: AuthorizedService, private router: Router, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.fetchAccounts();
@@ -24,7 +24,7 @@ export class AccountsComponent implements OnInit {
       .subscribe((response: any) => { 
         this.accounts = response;
       }, error => {
-        this.error = error;
+        this.alertService.error = error;
       });
   }
 
@@ -34,7 +34,7 @@ export class AccountsComponent implements OnInit {
         this.authorizedService.fetchClientInfo();
         this.accounts = this.accounts.filter(account => account.accountKey !== accountKey);
       }, error => {
-        this.error = error;
+        this.alertService.error = error;
       });
     }
 }

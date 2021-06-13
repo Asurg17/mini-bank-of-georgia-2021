@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/alert/alert.service';
 
 import { BgValidators } from 'src/app/shared/bg-validators';
 import { AuthorizationService } from 'src/app/shared/servicies/authorization.service';
@@ -13,9 +14,8 @@ import { AuthorizationService } from 'src/app/shared/servicies/authorization.ser
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
-  error;
 
-  constructor(private authorizationService: AuthorizationService, private router: Router) {}
+  constructor(private authorizationService: AuthorizationService, private router: Router, private alertService: AlertService) {}
 
   ngOnInit(): void {
     this.initForm()
@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
         this.form.reset();
         this.router.navigate(['/']);
       }, error => {
-        this.error = error;
+        this.alertService.error = error;
       });
   }
 

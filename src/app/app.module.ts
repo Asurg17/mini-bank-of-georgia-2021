@@ -25,6 +25,8 @@ import { ValidationMessageComponent } from './shared/validation-message/validati
 import { StyleNumberPipe } from './shared/style-number.pipe';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { AuthInterceptorService } from './shared/servicies/auth-interceptor.service';
+import { AlertComponent } from './shared/alert/alert.component';
+import { PlaceholderDirective } from './shared/placeholder.directive';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { AuthInterceptorService } from './shared/servicies/auth-interceptor.serv
     NotFoundComponent,
     ValidationMessageComponent,
     StyleNumberPipe,
-    LoaderComponent
+    LoaderComponent,
+    AlertComponent,
+    PlaceholderDirective
   ],
   imports: [
     BrowserModule,

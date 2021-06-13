@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/alert/alert.service';
 
 import { BgValidators } from 'src/app/shared/bg-validators';
 import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
@@ -13,9 +14,8 @@ import { AuthorizedService } from 'src/app/shared/servicies/authorized.service';
 export class CreateComponent implements OnInit {
 
   form: FormGroup;
-  error;
 
-  constructor(public authorizedService: AuthorizedService, private router: Router) {}
+  constructor(public authorizedService: AuthorizedService, private router: Router, private alertService: AlertService) {}
 
   ngOnInit(): void {
     this.initForm()
@@ -36,7 +36,7 @@ export class CreateComponent implements OnInit {
         this.form.reset();
         this.router.navigate(['krn/accounts']);
       }, error => {
-        this.error = error;
+        this.alertService.error = error;
       });
   }
 

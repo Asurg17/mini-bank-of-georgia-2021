@@ -1,2 +1,3 @@
 <router-outlet></router-outlet>
 <bg-loader></bg-loader>
+<bg-alert *ngIf="alertService.error" [error]="alertService.error" (closed)="alertService.error = null"></bg-alert>

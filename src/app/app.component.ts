@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from './shared/alert/alert.service';
 
 import { AuthorizationService } from './shared/servicies/authorization.service';
 
@@ -10,7 +11,7 @@ import { AuthorizationService } from './shared/servicies/authorization.service';
 export class AppComponent implements OnInit {
   name = 'Levan';
 
-  constructor(private authorizationService: AuthorizationService) { }
+  constructor(private authorizationService: AuthorizationService, public alertService: AlertService) { }
 
   ngOnInit(): void {
     this.authorizationService.autoLogin();
