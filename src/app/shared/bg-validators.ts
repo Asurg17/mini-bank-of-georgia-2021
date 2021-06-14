@@ -30,7 +30,7 @@ export class BgValidators extends Validators{
     }
 
     static minimalNumberValidation(control: AbstractControl): { [key: string]: any } {
-        if (control.value == null || control.value <= 0) return { minimalNumberRestriction: "გთხოვთ შეიყვანოთ დადებითი რიცხვი" }
+        if (control.value == null || control.value < 0) return { minimalNumberRestriction: "გთხოვთ შეიყვანოთ მინიმუმ 0" }
     }
   
 }
